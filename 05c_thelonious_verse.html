@@ -498,7 +498,7 @@ function loadVid(el){
       <input type="email" name="EMAIL" autocomplete="email" data-i18n-attr-placeholder="modal_email" placeholder="_" required>
       <label class="check"><input type="checkbox" required> <span data-i18n="modal_consent">_</span></label>
       <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;border:0;padding:0">
-      <input type="hidden" name="locale" value="fr">
+      <input type="hidden" name="locale" class="nl-locale" value="fr">
       <div id="nlMsg" class="nl-msg" style="display:none" role="status"></div>
       <button type="submit" data-i18n="modal_submit">_</button>
     </form>
@@ -549,6 +549,7 @@ function applyLang(lang) {
   document.querySelectorAll('.lang-picker button').forEach(b => {
     b.classList.toggle('active', b.dataset.langBtn === lang);
   });
+  document.querySelectorAll('.nl-locale').forEach(el => { el.value = lang; });
 }
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.lang-picker button').forEach(b => {
@@ -570,7 +571,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, {passive:true});
   }
 });
-function openModal(){document.getElementById('newsletterModal').classList.add('open');}
+function openModal(){
+  document.getElementById('newsletterModal').classList.add('open');
+  var rc = document.querySelector('#newsletterModal .g-recaptcha');
+  if (rc && !window.__rcLoaded) { window.__rcLoaded = true; var s = document.createElement('script'); s.src = 'https://www.google.com/recaptcha/api.js'; s.async = true; document.head.appendChild(s); }
+}
 function closeModal(){document.getElementById('newsletterModal').classList.remove('open');}
 </script>
 </body>
