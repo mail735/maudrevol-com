@@ -338,6 +338,18 @@ section{padding:96px 0;position:relative}
 .press-media .attrib{font-family:var(--font-mono);font-size:.88rem;color:var(--ink-mid);margin-bottom:1.6rem}
 @media(max-width:880px){.press-media{grid-template-columns:1fr;gap:28px}}
 
+/* Contact-Teaser: Grid-Blowout-Fix (lange E-Mail/Telefon-Zeilen sprengten die 1fr-Spur,
+   Text lief rechts aus dem Panel — gemeldet iPhone 13 mini, 12.06.) */
+.contact-teaser > *{min-width:0}
+.contact-teaser .info dd{overflow-wrap:anywhere}
+.contact-teaser .text h2{overflow-wrap:break-word}
+@media(max-width:880px){
+  .contact-teaser{padding:40px 22px}
+  .contact-teaser h2{font-size:clamp(1.8rem,7.5vw,2.6rem)}
+  .contact-teaser .info dl{grid-template-columns:1fr;gap:2px 0}
+  .contact-teaser .info dt{padding-top:14px}
+}
+
 /* iOS / Mobile: Header-Fix + Bottom-Tab-Navigation (Maud Welle 6) */
 .header-cta{position:relative;z-index:5}
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:1200;background:rgba(247,240,230,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 -1px 0 rgba(45,80,22,.16);overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:env(safe-area-inset-bottom)}
@@ -565,11 +577,11 @@ function loadVid(el){
     <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
     <h3 data-i18n="modal_title">_</h3>
     <p data-i18n="modal_text">_</p>
-    <form class="modal-form" action="#" method="post" onsubmit="event.preventDefault();alert('Demo — newsletter signup placeholder');closeModal();">
-      <input type="text" data-i18n-attr-placeholder="modal_first" placeholder="_" required>
-      <input type="text" data-i18n-attr-placeholder="modal_last" placeholder="_" required>
-      <input type="email" data-i18n-attr-placeholder="modal_email" placeholder="_" required>
+    <form class="modal-form" method="POST" action="https://4b47134d.sibforms.com/serve/MUIFAPir20MXV4YSIaHPkNZBhgKL7k-_jb7j7_gQJ1UpFjums4Bd37v_aGyHopP-DOmC42AX1QAr14vZVrpuEtljkfxZl8Yaaw4B1Ni6lInsROEn82gWzXNyZxuiwio1tWCNjynmzvMptAwS96_iAWbHlhmfjJ9fQeFQXtqBUYL0ta8cvQ-hWyuQyOjwyJfANdarYMacAt_5kWUuHQ==" target="_blank" onsubmit="this.locale.value=currentLang;setTimeout(closeModal,400);">
+      <input type="email" name="EMAIL" autocomplete="email" data-i18n-attr-placeholder="modal_email" placeholder="_" required>
       <label class="check"><input type="checkbox" required> <span data-i18n="modal_consent">_</span></label>
+      <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;border:0;padding:0">
+      <input type="hidden" name="locale" value="fr">
       <button type="submit" data-i18n="modal_submit">_</button>
     </form>
   </div>
